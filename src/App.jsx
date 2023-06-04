@@ -29,6 +29,14 @@ function App() {
   const [pickedWord,setPickedWord] = useState("");
   const [pickedCategory, setPickedCategory] = useState("");
   const [letters,setLetters] = useState([]);
+  //letras adivinhadas
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  //letras erradas
+  const [wrongLetters,setWrongLetters] = useState([]);
+  //chances
+  const [guesses,setGuesses] = useState(3);
+  //pontuação
+  const [score,setScore] = useState(0);
 
   //função que sorteia palavra e categoria 
   const pickWordAndCategory  = () =>{
@@ -54,15 +62,15 @@ function App() {
     //seta as variaveis
     setPickedWord(word);
     setPickedCategory(category);
-    setLetters(letters);
+    setLetters(wordLetters);
     
     //muda de pagina
     setGameStage(stages[1].name);
   }
 
   //process the letter input
-  const verifyLetter = () =>{
-    setGameStage(stages[2].name);
+  const verifyLetter = (letter) => {
+    console.log(letter);
   }
 
   //reinicia o jogo
@@ -73,7 +81,16 @@ function App() {
   return (
     <div className='App'>
       {gameStage === "start" && <StartScreen startGame={startGame} />}
-      {gameStage === "game" && <Game verifyLetter={verifyLetter} />}
+      {gameStage === "game" && <Game 
+        verifyLetter = {verifyLetter}
+        pickedWord = {pickedWord}
+        pickedCategory = {pickedCategory}
+        letters = {letters}
+        guessedLetters = {guessedLetters}
+        wrongLetters = {wrongLetters}
+        guesses = {guesses}
+        score = {score}      
+      />}
       {gameStage === "end" && <GameOver retry={retry} />}
     </div>
   )
