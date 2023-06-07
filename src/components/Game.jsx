@@ -57,6 +57,7 @@ const Game = ({
           onChange={(e) => setLetter(e.target.value)}
           value={letter}
           ref={letterInputRef}
+          autoFocus
            />
           <button>Jogar</button>
         </form>
